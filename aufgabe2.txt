@@ -1,0 +1,67 @@
+1. Welche URL wird aufgerufen wenn Sie versuchen sich anzumelden?
+   URL: http://localhost:8080/test/webdev-project-viergewinnt/login
+
+2. Welche „Method“ wird im Reiter Network angezeigt?
+   Method: GET
+
+3. Welche URL wird aufgerufen wenn Sie versuchen sich zu registrieren?
+   URL: http://localhost:8080/test/webdev-project-viergewinnt/login
+
+4. Welche „Method“ wird im Reiter Network angezeigt?
+   Method: POST
+
+5. Versuchen Sie einen Nutzer mit dem Namen test zu registrieren – wie ist der
+   Response? (Chrome Entwicklertools: Network -> klick bei Name auf login -> Response)
+
+    Bei Eingabe test, Benutzer bereits registriert:
+    {"result":false,"data":{"errorFields":{"name":"Benutzername ist schon vorhanden!"}}}
+
+    Bei Eingabe test3, Benutzer war noch nicht vorhanden:
+    {"result":true,"message":"Benutzer wurde erfolgreich hinzugef\u00fcgt!"}
+
+
+    Melden Sie sich an:
+    o Benutzername: test
+    o Passwort: testpassword
+
+7. Legen Sie eine Neue Adresse an – wie ist hier die Method? Wie lautet der Name/aufgerufene URL?
+   Method: POST
+   URL: http://localhost:8080/test/webdev-project-viergewinnt/api/adress
+
+8. Bearbeiten Sie eine Adresse und klicken Sie auf speichern – wie ist hier die Method?
+    (evtl. Haken bei „Preserve log“ setzen) Wie lautet hier der Name/aufgerufene URL?
+   Method: PUT
+   URL: http://localhost:8080/test/webdev-project-viergewinnt/api/adress
+
+9. Löschen Sie die neu angelegte Adresse – wie ist hier die Method? Wie lautet hier der Name/aufgerufene URL?
+   Method: DELETE
+   URL: http://localhost:8080/test/webdev-project-viergewinnt/api/address/
+
+10. Probieren Sie einmal eine eigene Route anzulegen. Beispielsweise, dass Sie
+    eine zusätzliche url für den Login definieren (z.B. /anmelden) – der LoginController soll aber weiterhin verwendet werden.
+    Dies können Sie in der Datei includes/routes.php vornehmen. Rufen Sie anschließend die URL auf.
+    Ich habe
+    $route['/login'] = array('controller' => 'LoginController', 'uniqueName' => 'login');
+    zu
+    $route['/anmelden'] = array('controller' => 'LoginController', 'uniqueName' => 'login');
+    geändert.
+
+
+11. Sehen Sie sich mal ein paar Views in dem Ordner includes/views an. Werfen
+    Sie insbesondere einen Blick auf die Datei includes/views/parts/header.php
+
+    Die header.php wurde einmal geschrieben und wird dann für alle Views verwendet,
+    damit muss nicht für jede Seite ein neuer Header geschrieben werden weil dieser
+    durch den Verweis auf header.php eingebunden werden kann. Somit muss bei Veränderungen
+    nur einmal der Code verändert werden und nicht für jede Seite extra.
+
+
+12. Versuchen Sie nachzuvollziehen wie der View die Daten erhält. Offenbar wird
+    im Controller mittels $this->view->variablenname = "wert“; ein Wert gesetzt.
+    Auf diesen kann dann im view selbst mit $this->variablenname zugegriffen
+    werden
+
+    Der View erhält die Daten vom Controller mit $this. Damit kann der Controller auf
+    User und Adresse zurgreifen. z.B.
+    <?php if($this->current == "login"): ?>
+    <?php if($this->current == "index"): ?>
